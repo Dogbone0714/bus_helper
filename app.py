@@ -4,9 +4,17 @@ from schedule import next_bus
 
 app = Flask(__name__)
 
-@app.route("/")
-def index():
-    return "歡迎使用聯大校車查詢平台"
+@app.route("/callback", methods=["POST"])
+def callback():
+    signature = request.headers["X-Line-Signature"]
+    body = request.get_data(as_text=True)
+
+    try:
+        handler.handle(body, signature)
+    except InvalidSignatureError:
+        abort(400)
+
+    return "OK"
 
 @app.route("/next_bus")
 def get_next_bus():

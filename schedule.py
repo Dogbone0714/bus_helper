@@ -31,7 +31,7 @@ LINE_CHANNEL_SECRET = "0b2f138bb8c972e2478f7cb697dcbca8"
 line_bot_api = LineBotApi(LINE_CHANNEL_ACCESS_TOKEN)
 handler = WebhookHandler(LINE_CHANNEL_SECRET)
 
-@app.route("/")
+@app.route("/callback", methods=["POST"])
 def home():
     return "聯大校車 LINE Bot 啟動中！"
 
