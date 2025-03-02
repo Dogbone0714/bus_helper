@@ -47,7 +47,7 @@ def callback():
 
     return "OK"
 
-@handler.add(MessageEvent, MessageEvent.message.__class__)
+@handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     user_message = event.message.text.strip()
     if user_message in bus_schedule:
